@@ -6,6 +6,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.inaing.inaeats.dto.error.ErrorMessageDto;
 import com.inaing.inaeats.response.RestStandardResponse;
 
 import jakarta.servlet.ServletException;
@@ -20,7 +21,8 @@ public class OtpAuthenticationFailureHandler implements AuthenticationFailureHan
             AuthenticationException exception) throws IOException, ServletException {
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         response.setContentType("application/json");
-        RestStandardResponse<String> errorResponse = new RestStandardResponse<String>(403, exception.getMessage());
+        RestStandardResponse<ErrorMessageDto> errorResponse = new RestStandardResponse<ErrorMessageDto>(403,
+                new ErrorMessageDto(exception.getMessage()));
         System.out.println(errorResponse.getTimestamp());
         objectMapper.writeValue(response.getWriter(), errorResponse);
     }
