@@ -51,6 +51,7 @@ public class OtpAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         SecurityContextHolder.getContext().setAuthentication(authResult);
         RestStandardResponse<BasicUserDetailsWithTokenDto> restResponse = new RestStandardResponse<BasicUserDetailsWithTokenDto>(
                 200, user);
+        response.setContentType("application/json");
         new ObjectMapper().writeValue(response.getWriter(), restResponse);
     }
 }
