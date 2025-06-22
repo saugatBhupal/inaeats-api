@@ -48,20 +48,23 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
 
-    private UserType user_type = UserType.USER;
+    @Column(name = "user_type")
+    private UserType userType = UserType.USER;
     private String otp;
+    @Column(name = "otp_expire_time")
     private LocalDateTime otpExpireTime;
 
     @Nonnull
-    @Column(nullable = false)
+    @Column(nullable = false, name = "has_registered")
     private Boolean hasRegistered = false;
 
     @Enumerated(EnumType.STRING)
-    private Role user_role = Role.NULL;
+    @Column(name = "user_role")
+    private Role userRole = Role.NULL;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        String authority = (user_role == null) ? Role.NULL.toString() : user_role.toString();
+        String authority = (userRole == null) ? Role.NULL.toString() : userRole.toString();
         return List.of(new SimpleGrantedAuthority(authority));
     }
 

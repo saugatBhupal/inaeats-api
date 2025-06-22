@@ -1,6 +1,7 @@
 package com.inaing.inaeats.exception;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -15,6 +16,14 @@ public class RestExceptionHandler {
         RestStandardResponse<ErrorMessageDto> response = new RestStandardResponse<>(exception.getStatus(),
                 new ErrorMessageDto(exception.getMessage()));
         return ResponseEntity.status(exception.getStatus()).body(response);
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<RestStandardResponse<ErrorMessageDto>> usernameNotFoundException(
+            UsernameNotFoundException exception) {
+        RestStandardResponse<ErrorMessageDto> response = new RestStandardResponse<>(404,
+                new ErrorMessageDto(exception.getMessage()));
+        return ResponseEntity.status(404).body(response);
     }
 
 }

@@ -1,8 +1,8 @@
 package com.inaing.inaeats.service.serviceImpl;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -14,6 +14,7 @@ import com.inaing.inaeats.dto.user.BasicUserDetailsWithTokenDto;
 import com.inaing.inaeats.dto.user.RegisterUserRequestDto;
 import com.inaing.inaeats.dto.user.UserRequestDto;
 import com.inaing.inaeats.entity.User;
+import com.inaing.inaeats.entity.enums.UserType;
 import com.inaing.inaeats.exception.RestStandardException;
 import com.inaing.inaeats.mapper.UserMapper;
 import com.inaing.inaeats.repository.UserRepository;
@@ -36,14 +37,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public BasicUserDetailsWithTokenDto register(RegisterUserRequestDto registerUserRequestDto) {
         User user = userRepository.findByPhone(registerUserRequestDto.getPhone())
-                .orElseThrow(() -> new RestStandardException(404, "User with this phone number doesn't exist"));
+                .orElseThrow(() -> new UsernameNotFoundException("User with this phone number doesn't exist"));
         user.setPhone(registerUserRequestDto.getPhone());
         user.setDob(registerUserRequestDto.getDob());
         user.setEmail(registerUserRequestDto.getEmail());
         user.setFullname(registerUserRequestDto.getFullname());
         user.setGender(registerUserRequestDto.getGender());
         user.setHasRegistered(true);
-        user.setAge(Math.abs(Date.valueOf(LocalDate.now()).compareTo(registerUserRequestDto.getDob())));
+        user.setAge(Period.between(registerUserRequestDto.getDob().toLocalDate(), LocalDate.now()).getYears());
+        user.setUserType(UserType.USER);
         user = userRepository.save(user);
 
         BasicUserDetailsWithTokenDto basicUserDetailsWithTokenDto = userMapper.tobaBasicUserDetailsWithTokenDto(user);
@@ -85,7 +87,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public BasicUserDetailsWithTokenDto getBasicUserDetailsWithTOken(UserRequestDto userRequestDto) {
         User user = userRepository.findByPhone(userRequestDto.getPhone())
-                .orElseThrow(() -> new UsernameNotFoundException("No user forund"));
+                .orElseThrow(() -> new UsernameNotFoundException("User with this phone number doesn't exist."));
         BasicUserDetailsWithTokenDto basicUserDetailsWithTokenDto = userMapper.tobaBasicUserDetailsWithTokenDto(user);
         basicUserDetailsWithTokenDto.setToken(JwtService.generateToken(user));
         return basicUserDetailsWithTokenDto;
