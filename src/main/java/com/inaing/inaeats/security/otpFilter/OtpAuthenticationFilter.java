@@ -10,6 +10,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inaing.inaeats.dto.user.BasicUserDetailsWithTokenDto;
 import com.inaing.inaeats.dto.user.UserRequestDto;
+import com.inaing.inaeats.response.RestStandardResponse;
 import com.inaing.inaeats.service.UserService;
 
 import jakarta.servlet.FilterChain;
@@ -48,6 +49,8 @@ public class OtpAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         BasicUserDetailsWithTokenDto user = userService
                 .getBasicUserDetailsWithTOken(new UserRequestDto(authResult.getName()));
         SecurityContextHolder.getContext().setAuthentication(authResult);
-        new ObjectMapper().writeValue(response.getWriter(), user);
+        RestStandardResponse<BasicUserDetailsWithTokenDto> restResponse = new RestStandardResponse<BasicUserDetailsWithTokenDto>(
+                200, user);
+        new ObjectMapper().writeValue(response.getWriter(), restResponse);
     }
 }
