@@ -4,12 +4,14 @@ import com.inaing.inaeats.entity.enums.DietType;
 import com.inaing.inaeats.entity.enums.DifficultyType;
 
 import lombok.AllArgsConstructor;
-import lombok.Value;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Value
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
-public class MealKitCreationRequestDto {
-    private String productName;
+public class MealKitResponseDto {
+    private String id;
     private String productDescription;
     private Integer shelfLife;
     private Integer portion;

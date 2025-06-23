@@ -1,4 +1,4 @@
-package com.inaing.inaeats.exception;
+package com.inaing.inaeats.exception.exceptions;
 
 public class RestStandardException extends RuntimeException {
     private final int status;

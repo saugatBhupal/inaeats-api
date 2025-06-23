@@ -2,7 +2,6 @@ package com.inaing.inaeats.dto.user;
 
 import java.sql.Date;
 
-import com.inaing.inaeats.entity.enums.DifficultyType;
 import com.inaing.inaeats.entity.enums.Gender;
 import com.inaing.inaeats.entity.enums.UserType;
 
@@ -24,7 +23,4 @@ public class BasicUserDetailsWithTokenDto {
     private UserType userType;
     private Boolean hasRegistered;
     private String token;
-    private String recipeVideo;
-    private Integer duration;
-    private DifficultyType difficultyType;
 }

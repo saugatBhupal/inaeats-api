@@ -15,7 +15,7 @@ import com.inaing.inaeats.dto.user.RegisterUserRequestDto;
 import com.inaing.inaeats.dto.user.UserRequestDto;
 import com.inaing.inaeats.entity.User;
 import com.inaing.inaeats.entity.enums.UserType;
-import com.inaing.inaeats.exception.RestStandardException;
+import com.inaing.inaeats.exception.exceptions.RestStandardException;
 import com.inaing.inaeats.mapper.UserMapper;
 import com.inaing.inaeats.repository.UserRepository;
 import com.inaing.inaeats.security.jwtFilter.JwtService;

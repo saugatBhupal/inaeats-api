@@ -12,7 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import com.inaing.inaeats.dto.otp.OtpValidationDto;
-import com.inaing.inaeats.exception.RestStandardException;
+import com.inaing.inaeats.exception.exceptions.RestStandardException;
 import com.inaing.inaeats.service.UserService;
 
 import lombok.AllArgsConstructor;
