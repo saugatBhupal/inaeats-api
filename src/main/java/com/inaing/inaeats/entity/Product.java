@@ -64,4 +64,8 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = { CascadeType.ALL }, orphanRemoval = true)
     private List<Image> images;
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(name = "product_allergen", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "allergen_id"))
+    private List<Allergen> allergens;
 }

@@ -1,4 +1,4 @@
-package com.inaing.inaeats.utils.environment.environmentProperty;
+package com.inaing.inaeats.environment.environmentProperty;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

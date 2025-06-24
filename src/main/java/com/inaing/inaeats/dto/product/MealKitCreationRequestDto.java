@@ -19,7 +19,6 @@ public class MealKitCreationRequestDto {
     private Integer fats;
     private Integer protein;
     private Integer carbs;
-    private String recipeVideo;
     private Integer duration;
     private DifficultyType difficulty;
 }

@@ -1,5 +1,5 @@
 package com.inaing.inaeats.entity.enums;
 
 public enum Role {
-    ADMIN, USER, DELIVERY, NULL
+    ROLE_ADMIN, ROLE_USER, ROLE_DELIVERY, NULL
 }
