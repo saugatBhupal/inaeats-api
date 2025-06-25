@@ -1,5 +1,7 @@
 package com.inaing.inaeats.dto.product;
 
+import java.util.List;
+
 import com.inaing.inaeats.entity.enums.DietType;
 import com.inaing.inaeats.entity.enums.DifficultyType;
 
@@ -21,4 +23,6 @@ public class MealKitCreationRequestDto {
     private Integer carbs;
     private Integer duration;
     private DifficultyType difficulty;
+    private List<String> tags;
+    private List<String> categories;
 }

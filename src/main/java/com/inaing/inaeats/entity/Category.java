@@ -11,11 +11,13 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "category", uniqueConstraints = { @UniqueConstraint(columnNames = "name") })
@@ -25,10 +27,10 @@ public class Category {
     private String id;
 
     @Column(name = "category_name")
-    private String categoryName;
+    private String name;
 
     @Column(name = "category_image")
-    private String categoryImage;
+    private String image;
 
     @ManyToMany(mappedBy = "categories")
     private Set<Product> products;
