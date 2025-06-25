@@ -10,11 +10,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "allergen")
@@ -24,7 +26,7 @@ public class Allergen {
     private String id;
 
     @Column(name = "allergen_name")
-    private String allergenName;
+    private String name;
 
     @ManyToMany(mappedBy = "allergens")
     private Set<Product> products;

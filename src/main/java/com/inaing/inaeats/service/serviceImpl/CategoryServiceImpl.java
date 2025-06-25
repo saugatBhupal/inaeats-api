@@ -25,10 +25,10 @@ public class CategoryServiceImpl implements CategoryService {
                 .filter(name -> !name.isEmpty())
                 .collect(Collectors.toSet());
 
-        List<Category> exisitingCategories = categoryRepository.findAllByNameInCategories(distinctNames);
+        List<Category> exisitingCategories = categoryRepository.findAllByNameIn(distinctNames);
 
         return exisitingCategories;
-        
+
     }
 
 }

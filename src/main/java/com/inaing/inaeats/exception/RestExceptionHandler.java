@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.inaing.inaeats.dto.error.ErrorMessageDto;
 import com.inaing.inaeats.exception.exceptions.FileUploadException;
+import com.inaing.inaeats.exception.exceptions.ResourceNotFoundException;
 import com.inaing.inaeats.exception.exceptions.RestStandardException;
 import com.inaing.inaeats.response.RestStandardResponse;
 
@@ -30,9 +31,19 @@ public class RestExceptionHandler {
 
     @ExceptionHandler(FileUploadException.class)
     public ResponseEntity<RestStandardResponse<ErrorMessageDto>> fileUploadException(FileUploadException exception) {
-        RestStandardResponse<ErrorMessageDto> response = new RestStandardResponse<ErrorMessageDto>(500,
+        RestStandardResponse<ErrorMessageDto> response = new RestStandardResponse<ErrorMessageDto>(
+                exception.getStatus(),
                 new ErrorMessageDto(exception.getMessage()));
-        return ResponseEntity.status(500).body(response);
+        return ResponseEntity.status(exception.getStatus()).body(response);
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<RestStandardResponse<ErrorMessageDto>> resourceNotFoundException(
+            ResourceNotFoundException exception) {
+        RestStandardResponse<ErrorMessageDto> response = new RestStandardResponse<ErrorMessageDto>(
+                exception.getStatus(),
+                new ErrorMessageDto(exception.getMessage()));
+        return ResponseEntity.status(exception.getStatus()).body(response);
     }
 
 }

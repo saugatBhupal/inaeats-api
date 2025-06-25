@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 @Component
 public class CloudinaryProperty {
-    
+
     @Value("${cloudinary.cloud_name}")
     private String cloudName;
 

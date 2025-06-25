@@ -1,4 +1,4 @@
-package com.inaing.inaeats.controller.public_access;
+package com.inaing.inaeats.controller.publicLevelAccess;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
