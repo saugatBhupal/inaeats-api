@@ -2,6 +2,8 @@ package com.inaing.inaeats.entity;
 
 import java.util.List;
 
+import org.hibernate.annotations.Formula;
+
 import com.inaing.inaeats.entity.enums.DietType;
 
 import jakarta.persistence.CascadeType;
@@ -43,10 +45,14 @@ public class Product {
     @Column(name = "shelf_life")
     private Integer shelfLife;
     private Integer portion;
+    private Integer price;
 
     @Column(name = "diet_type")
     @Enumerated(EnumType.STRING)
     private DietType dietType;
+
+    @Formula("product_type")
+    private String productType;
 
     private Integer weight;
     private Integer calories;

@@ -6,12 +6,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.inaing.inaeats.dto.product.ProductCreationDto;
 import com.inaing.inaeats.dto.product.ProductResponseDto;
+import com.inaing.inaeats.entity.Product;
 
-public interface ProductService {
+public interface ProductSubtypeService {
     public ProductResponseDto create(ProductCreationDto productCreationRequestDto, List<MultipartFile> images);
 
     public ProductResponseDto findProductById(String id);
 
-    public List<ProductResponseDto> searchProductByKeyword(String keyword);
+    public String getSupportedType();
 
+    public ProductResponseDto getProductOfInheritedEntitytype(Product product);
 }
