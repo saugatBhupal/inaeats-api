@@ -13,22 +13,29 @@ import com.inaing.inaeats.repository.TagRepository;
 import com.inaing.inaeats.service.TagService;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class TagServiceImpl implements TagService {
     private final TagRepository tagRepository;
 
     @Override
     public Tag findOrCreateByName(String tagName) {
-        return tagRepository.findByName(tagName)
-                .orElseGet(() -> tagRepository.save(
-                        Tag.builder().name(tagName).build()));
+        try {
+            return tagRepository.findByName(tagName)
+                    .orElseGet(() -> tagRepository.save(
+                            Tag.builder().name(tagName).build()));
+        } catch (Exception e) {
+            log.error("Error saving tag", e);
+            return null;
+        }
+
     }
 
     @Override
     public List<Tag> findOrCreateByName(List<String> tagNames) {
-
         Set<String> distinctNames = tagNames.stream().filter(Objects::nonNull)
                 .map(String::trim)
                 .filter(s -> !s.isEmpty())

@@ -30,11 +30,20 @@ public class ProductControllerPublic {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<?> getMethodName(@RequestParam("keyword") String keyword) {
+    public ResponseEntity<?> getSearchResults(@RequestParam("keyword") String keyword) {
         List<ProductResponseDto> responseDto = productService.searchProductByKeyword(keyword);
         RestStandardResponse<List<ProductResponseDto>> response = new RestStandardResponse<List<ProductResponseDto>>(
                 200,
                 responseDto);
         return ResponseEntity.ok().body(response);
     }
+
+    @GetMapping("/")
+    public ResponseEntity<?> getAllProducts() {
+        List<ProductResponseDto> responseDto = productService.findAll();
+        RestStandardResponse<List<ProductResponseDto>> response = new RestStandardResponse<List<ProductResponseDto>>(
+                200, responseDto);
+        return ResponseEntity.ok().body(response);
+    }
+
 }

@@ -37,4 +37,5 @@ public abstract class ProductResponseDto {
     private List<String> images;
     private List<String> tags;
     private List<String> categories;
+    private List<String> allergens;
 }

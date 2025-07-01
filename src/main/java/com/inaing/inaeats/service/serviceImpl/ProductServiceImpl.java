@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.inaing.inaeats.dto.product.ProductCreationDto;
 import com.inaing.inaeats.dto.product.ProductResponseDto;
 import com.inaing.inaeats.entity.Product;
+import com.inaing.inaeats.exception.exceptions.ResourceNotFoundException;
 import com.inaing.inaeats.factory.ProductSubtypeServiceFactory;
 import com.inaing.inaeats.repository.ProductRepository;
 import com.inaing.inaeats.service.ProductService;
@@ -44,7 +45,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponseDto findProductById(String id) {
-        Product product = productRepository.findById(id).get();
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product with this could not be found."));
         ProductSubtypeService productSubtypeService = productSubtypeServiceFactory
                 .getSubtypeService(product.getProductType());
         return productSubtypeService.getProductOfInheritedEntitytype(product);
@@ -62,6 +64,17 @@ public class ProductServiceImpl implements ProductService {
                 .toList();
         List<ProductResponseDto> results = findAllById(matchingProductIds);
         return results;
+    }
+
+    @Override
+    public List<ProductResponseDto> findAll() {
+        List<Product> products = productRepository.findAll();
+        List<ProductResponseDto> productDtos = new ArrayList<>();
+        for (Product product : products) {
+            productDtos.add(productSubtypeServiceFactory.getSubtypeService(product.getProductType())
+                    .getProductOfInheritedEntitytype(product));
+        }
+        return productDtos;
     }
 
 }

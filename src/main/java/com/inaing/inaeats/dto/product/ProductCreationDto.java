@@ -33,6 +33,7 @@ public abstract class ProductCreationDto {
     private Integer fats;
     private Integer protein;
     private Integer carbs;
+    private List<String> allergens;
     private List<String> tags;
     private List<String> categories;
 }
